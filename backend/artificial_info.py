@@ -20,6 +20,12 @@ EIGENS_PATH = ROOT_PATH + '/eigens/'
 SEGMENTS_PATH = ROOT_PATH + '/segments/'
 
 
+# MDS image save path
+MDS_IMAGE_SAVE_PATH = '../mdsImages/'
+
+# color clouds image save path
+CC_IMAGE_SAVE_PATH = '../colorClouds/'
+
 # OTHER
 
 SHAPE = (256, 16, 24) # artificial data shape with width 24, height 16 and 256 time steps

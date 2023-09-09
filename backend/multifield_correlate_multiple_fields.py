@@ -77,7 +77,6 @@ for ensembleIndex in range(len(ai.ENSEMBLE_INFOS)):
         Y, eigens = mds(distance_matrix, dimensions=3)
         print("... Done with " + u.colored_string("normal", "blue") + " mds for field: " + u.colored_string(ai.ENSEMBLE_INFOS[ensembleIndex][2], "purple") + " in: " + u.convert_seconds_to_string(time.time() - part_time))
         logging.debug("... Done with normal mds for field: " + ai.ENSEMBLE_INFOS[ensembleIndex][2] + " in: " + u.convert_seconds_to_string(time.time() - part_time))
-        np.save(ai.MDS_PATH + 'y_full_' + str(ai.ENSEMBLE_INFOS[ensembleIndex][2]) + "_" + str(ai.MDS_VARIANT) + '.npy', Y)
 
     np.save(ai.MDS_PATH + 'y_full_' + str(ensembleIndex) + '.npy', Y)
     np.save(ai.EIGENS_PATH + 'eigens_full_' + str(ensembleIndex) + '.npy', eigens)

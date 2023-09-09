@@ -70,9 +70,9 @@ def save_mds_image(mds_points, field_index):
     mds_img = np.flip(mds_img, axis=0)
     im = Image.fromarray(mds_img)
     if ai.MDS_VARIANT == "normal":
-        im.save("../mdsImages/" + str(ai.MDS_VARIANT) + "_" + str(ai.ENSEMBLE_INFOS[field_index][2]) + ".png", format='PNG')
+        im.save(ai.MDS_IMAGE_SAVE_PATH + str(ai.MDS_VARIANT) + "_" + str(ai.ENSEMBLE_INFOS[field_index][2]) + ".png", format='PNG')
     else:
-        im.save("../mdsImages/" + str(ai.MDS_VARIANT) + "+" + str(ai.SAMPLESIZE) + "_" + str(ai.ENSEMBLE_INFOS[field_index][2]) + ".png", format='PNG')
+        im.save(ai.MDS_IMAGE_SAVE_PATH + str(ai.MDS_VARIANT) + "+" + str(ai.SAMPLESIZE) + "_" + str(ai.ENSEMBLE_INFOS[field_index][2]) + ".png", format='PNG')
 
 
 def save_color_cloud_plot(mds_points, field_index):
@@ -85,6 +85,6 @@ def save_color_cloud_plot(mds_points, field_index):
     ax.scatter(mds_points[:, 0], mds_points[:, 1], mds_points[:, 2], c=(mds_img.astype(np.float) / 255))
 
     if ai.MDS_VARIANT == "normal":
-        plt.savefig("../colorClouds/" + str(ai.MDS_VARIANT) + "_" + str(ai.ENSEMBLE_INFOS[field_index][2]) + ".png")
+        plt.savefig(ai.CC_IMAGE_SAVE_PATH + str(ai.MDS_VARIANT) + "_" + str(ai.ENSEMBLE_INFOS[field_index][2]) + ".png")
     else:
-        plt.savefig("../colorClouds/" + str(ai.MDS_VARIANT) + "+" + str(ai.SAMPLESIZE) + "_" + str(ai.ENSEMBLE_INFOS[field_index][2]) + ".png")
+        plt.savefig(ai.CC_IMAGE_SAVE_PATH + str(ai.MDS_VARIANT) + "+" + str(ai.SAMPLESIZE) + "_" + str(ai.ENSEMBLE_INFOS[field_index][2]) + ".png")

@@ -17,15 +17,13 @@ $ npm install
 We tested this with the following dependencies:
 ```
     "@nuxtjs/axios": "^5.12.2",
-    "@nuxtjs/style-resources": "^1.0.0",
     "bootstrap": "^4.5.3",
     "core-js": "^3.6.5",
     "d3": "^7.8.5",
     "hammerjs": "^2.0.8",
-    "node-sass": "^5.0.0",
     "nuxt": "^2.14.6",
-    "sass": "^1.32.8",
-    "sass-loader": "^10.1.1",
+    "sass": "^1.29.0",
+    "sass-loader": "^10.0.5"
 ```
 
 For a detailed explanation of how things work, check out [Nuxt.js docs](https://nuxtjs.org).

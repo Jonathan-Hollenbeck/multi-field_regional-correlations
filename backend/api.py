@@ -112,8 +112,10 @@ def get_mds_image(field, swap=False):
     im = Image.fromarray(mds_img)
     im.save(b, format='PNG')
 
-    binary_fc = open(ai.COASTLINE, 'rb').read()
-    overlay = base64.b64encode(binary_fc).decode('utf-8')
+    overlay = None
+    if ai.COASTLINE is not None:
+        binary_fc = open(ai.COASTLINE, 'rb').read()
+        overlay = base64.b64encode(binary_fc).decode('utf-8')
     result = {
         "image": base64.b64encode(b.getvalue()).decode("utf-8"),
         "overlay": overlay
