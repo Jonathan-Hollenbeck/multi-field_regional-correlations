@@ -1,10 +1,9 @@
 import segment as s
-import higra as hg  # pip install higra
+import higra as hg
 import utils as u
 import scipy.cluster.hierarchy as sch
 import scipy.special._basic as schb
 import numpy as np
-# import statsmodels.api as sm
 import artificial_info as ai
 
 
@@ -21,37 +20,7 @@ def setup(g):
     pass
 
 
-def tree_nodes_equal(nodes_x, nodes_y):
-    if len(nodes_x) != len(nodes_y):
-        return False
-    for i in range(len(nodes_x)):
-        current_x = nodes_x[i]
-        current_y = nodes_y[i]
-        if not list_equal(current_x, current_y):
-            return False
-    return True
-
-
-def list_equal(list1, list2):
-    if len(list1) != len(list2):
-        return False
-    for i in range(len(list1)):
-        if list1[i] != list2[i]:
-            return False
-    return True
-
-
-def get_tree_nodes(g):
-    tree = []
-    cut_helper = hg.HorizontalCutExplorer(g.tree, g.altitudes)
-    for altitude in g.altitudes:
-        cut = cut_helper.horizontal_cut_from_altitude(altitude)
-        nodes = cut.nodes()
-        tree.append(nodes)
-
-    return tree
-
-
+# return the index of the given field name in the ensemble infos
 def get_index_by_name(name):
     for i in range(len(ai.ENSEMBLE_INFOS)):
         if ai.ENSEMBLE_INFOS[i][2] == name:
@@ -78,8 +47,7 @@ def create_mds_img(field_index):
 
 
 # Determine list of dictionaries for given watershed level
-# with segment, hull, color, refinement_level
-# as keys
+# with segment, hull, color, refinement_level as keys
 def get_segment_list(g, watershed_level, segments=None):
     refinement_level = None
     if segments is None:
@@ -159,9 +127,7 @@ def get_correlation_matrix(gx, gy, watershed_level_x, watershed_level_y, segment
 
 # Sort the given correlation matrix as well as the timelags and
 # nodes array by using a hierarchical clustering
-# Assume symmetric matrix here
 def sort_correlation_matrix(gx, gy, corr, time_lags, nodes_x, nodes_y):
-    # corr, time_lags, nodes = remove_empty_rows(corr, time_lags, nodes)
     Y = sch.linkage(corr, method=gx.linkage_method)
     Z1 = sch.dendrogram(Y)
     idx1 = Z1['leaves']
@@ -177,21 +143,6 @@ def sort_correlation_matrix(gx, gy, corr, time_lags, nodes_x, nodes_y):
     row = nodes_x[idx1]
     col = nodes_y[idy1]
     return corr.tolist(), time_lags.tolist(), row.tolist(), col.tolist()
-
-
-# Removes row without pairwise correlations from matrix
-def remove_empty_rows(data, time_lags, nodes):
-    np.fill_diagonal(data, 0)
-    xAxis = np.sum(np.abs(data), axis=0) == 0
-    yAxis = np.sum(np.abs(data), axis=1) == 0
-    remove = ~np.logical_and(xAxis, yAxis)
-    data = data[remove]
-    data = data[:, remove]
-    time_lags = time_lags[remove]
-    time_lags = time_lags[:, remove]
-    nodes = np.array(nodes)[remove]
-    np.fill_diagonal(data, 1)
-    return data, time_lags, nodes
 
 
 # Creates a dictionary that maps each segment to a color

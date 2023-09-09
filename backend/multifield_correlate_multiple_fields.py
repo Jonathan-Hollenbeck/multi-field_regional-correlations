@@ -37,7 +37,8 @@ for ensembleIndex in range(len(ai.ENSEMBLE_INFOS)):
     start_time = time.time()
 
     part_time = time.time()
-    #distance_matrix = np.load(ai.CORR_PATH + 'corr_full_' + str(ensembleIndex) + '.npy')
+    # load correlations; for debugging
+    # distance_matrix = np.load(ai.CORR_PATH + 'corr_full_' + str(ensembleIndex) + '.npy')
 
     timelines = u.concatenate_timelines(data)
     print("... Done with " + u.colored_string("concatenating timelines", "blue") + " of field: " + u.colored_string(ai.ENSEMBLE_INFOS[ensembleIndex][2], "purple") + " in: " + u.colored_string(u.convert_seconds_to_string(time.time() - part_time), "black"))

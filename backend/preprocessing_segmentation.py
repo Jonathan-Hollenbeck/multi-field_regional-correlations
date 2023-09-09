@@ -90,6 +90,8 @@ def get_correlation(means_a, means_b, a_msc, b_msc):
     return corrs, lag
 
 
+# checks if the resulting correlations exceed the given threshold
+# and transformes the ones that do to a 1 or -1 and returns that
 def check_threshold(corrs, lag, t):
     max_corr = copy.copy(corrs[lag])
     max_corr[max_corr >= t] = 1
@@ -147,7 +149,7 @@ def print_progress(iteration, max_iteration, start_time, length):
 # MEANS
 
 
-# Calculate mean for the respective segment (node) and store in it
+# Calculate mean for the respective segment (node) and store the result in it
 def add_means(node, segments, data):
     if segments[node].is_leaf:
         segments[node].means = get_ensemble_means(node, segments, data)
@@ -209,6 +211,7 @@ for ensembleIndex in range(len(ai.ENSEMBLE_INFOS)):
     mds_points = u.normalize_point(mds_points)
     mds_image = np.reshape(mds_points, (*image_shape, mds_points.shape[-1]))
     size = mds_image.shape[:2]
+
     # graph
     tree, altitudes = u.create_graph(mds_image, size)
 
@@ -271,6 +274,7 @@ for base in range(len(ai.ENSEMBLE_INFOS)):
         print("\nDone with " + u.colored_string("correlations", "blue") + " between fields: " + u.colored_string(ai.ENSEMBLE_INFOS[base][2], "purple") + " and " + u.colored_string(ai.ENSEMBLE_INFOS[compare][2], "purple") + " in: " + u.convert_seconds_to_string(time.time() - start_corr))
         logging.debug("Done with correlations between fields: " + ai.ENSEMBLE_INFOS[base][2] + " and " + ai.ENSEMBLE_INFOS[compare][2] + " in: " + u.convert_seconds_to_string(time.time() - start_corr))
 
+# save correlations in segments
 for index in range(len(segments_list)):
     start_save = time.time()
     segment.save(ai.SEGMENTS_PATH + 'segments_' + str(index) + '.dat', segments_list[index][0])

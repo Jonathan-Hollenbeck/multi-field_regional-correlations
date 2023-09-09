@@ -20,6 +20,7 @@ def calculate_hull(segment_points):
     return hulls, polygons
 
 
+# finds clusters in a list of points
 def find_clusters(points):
     clusters_points_list = []
     extreme_values_list = []
@@ -84,6 +85,7 @@ def find_clusters(points):
     return clusters_points_list, extreme_values_list
 
 
+# creates a hull around a list of points
 def create_hull(points, extreme_values, hulls, polygons):
     width = extreme_values[2] - extreme_values[0]
     height = extreme_values[3] - extreme_values[1]
@@ -199,6 +201,7 @@ def create_hull(points, extreme_values, hulls, polygons):
     return hulls, polygons
 
 
+# finds the path of the hull
 def find_hulls_path(hull_points, hull_dict, offset_x, offset_y):
     # find hull path clockwise, and treat extended points accordingly
     hull_path = []
@@ -248,6 +251,7 @@ def find_hulls_path(hull_points, hull_dict, offset_x, offset_y):
     return hull_path, hull_points
 
 
+# checks if there is a point in a given list of points in the up direction and returns it if there is
 def check_up(x, y, hull_points):
     current_dist = -1
     current_point = (-1, -1)
@@ -258,6 +262,7 @@ def check_up(x, y, hull_points):
     return current_point
 
 
+# checks if there is a point in a given list of points in the right direction and returns it if there is
 def check_right(x, y, hull_points):
     current_dist = -1
     current_point = (-1, -1)
@@ -268,6 +273,7 @@ def check_right(x, y, hull_points):
     return current_point
 
 
+# checks if there is a point in a given list of points in the down direction and returns it if there is
 def check_down(x, y, hull_points):
     current_dist = -1
     current_point = (-1, -1)
@@ -278,6 +284,7 @@ def check_down(x, y, hull_points):
     return current_point
 
 
+# checks if there is a point in a given list of points in the left direction and returns it if there is
 def check_left(x, y, hull_points):
     current_dist = -1
     current_point = (-1, -1)
@@ -314,7 +321,7 @@ for ensembleIndex in range(len(ai.ENSEMBLE_INFOS)):
     print("Done calculating " + u.colored_string("hulls", "blue") + " for field: " + u.colored_string(ai.ENSEMBLE_INFOS[ensembleIndex][2], "purple") + " in: " + u.convert_seconds_to_string(time.time() - start_calc))
     logging.debug("Done calculating hulls for field: " + ai.ENSEMBLE_INFOS[ensembleIndex][2] + " in: " + u.convert_seconds_to_string(time.time() - start_calc))
 
-    # saving segments
+    # saving result in segments
     start_save = time.time()
     s.save(ai.SEGMENTS_PATH + 'segments_' + str(ensembleIndex) + '.dat', segments)
 

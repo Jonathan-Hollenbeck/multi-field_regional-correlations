@@ -256,9 +256,6 @@ if __name__ == '__main__':
         g.append(Global())
 
     ah.setup(g)
-    watershed_level = 20
-
-    #get_correlation_matrix_by_watershed_level(100, 100, ai.THRESHOLDS[0], 'centroid')
 
     parser = argparse.ArgumentParser(description='Start the webserver.')
     parser.add_argument('--port', type=int, help='Port for the webserver (default 5000)', default=5000)
@@ -266,28 +263,3 @@ if __name__ == '__main__':
     args = vars(parser.parse_args())
     app.run(debug=False, port=args['port'], host=args['host'])
 
-'''
-    segments_x = get_segments_by_watershed_level(0, watershed_level, None)
-    segments_y = get_segments_by_watershed_level(1, watershed_level, None)
-
-    mds_image_x = get_mds_image(0)
-    mds_image_y = get_mds_image(1)
-
-    matrix = get_correlation_matrix_by_watershed_level(watershed_level, watershed_level, ai.THRESHOLDS[0], 'centroid')
-    
-    segments_x_keys = ""
-    for segment in segments_x["segments"]:
-        segments_x_keys += str(segment["segment"]) + ","
-    segments_x_keys = segments_x_keys[:-1]
-
-    segments_y_keys = ""
-    for segment in segments_y["segments"]:
-        segments_y_keys += str(segment["segment"]) + ","
-    segments_y_keys = segments_y_keys[:-1]
-
-    refined_segment_x = refine_segment(0, segments_x_keys, watershed_level)
-    refined_segment_y = refine_segment(1, segments_y_keys, watershed_level)
-
-    curve_segment_x = get_curves_for_segments(0, segments_x_keys)
-    curve_segment_y = get_curves_for_segments(1, segments_y_keys)
-    '''

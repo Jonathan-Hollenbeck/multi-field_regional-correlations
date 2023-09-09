@@ -79,6 +79,7 @@ for ensembleIndex in range(len(ai.ENSEMBLE_INFOS)):
     print("\nDone adding " + u.colored_string("minmax", "blue") + " for field: " + u.colored_string(ai.ENSEMBLE_INFOS[ensembleIndex][2], "purple") + " in: " + u.convert_seconds_to_string(time.time() - start_minmax))
     logging.debug("Done adding minmax for field: " + ai.ENSEMBLE_INFOS[ensembleIndex][2] + " in: " + u.convert_seconds_to_string(time.time() - start_minmax))
 
+    # save in segments
     start_save = time.time()
     s.save(ai.SEGMENTS_PATH + 'segments_' + str(ensembleIndex) + '.dat', segments)
 
