@@ -81,8 +81,11 @@ for ensembleIndex in range(len(ai.ENSEMBLE_INFOS)):
     np.save(ai.MDS_PATH + 'y_full_' + str(ensembleIndex) + '.npy', Y)
     np.save(ai.EIGENS_PATH + 'eigens_full_' + str(ensembleIndex) + '.npy', eigens)
 
-    data_manager.save_mds_image(Y, ensembleIndex)
-    data_manager.save_color_cloud_plot(Y, ensembleIndex)
+    # is paths for the MDS image and or Color Cloud image are set, save them
+    if ai.MDS_IMAGE_SAVE_PATH is not None:
+        data_manager.save_mds_image(Y, ensembleIndex)
+    if ai.CC_IMAGE_SAVE_PATH is not None:
+        data_manager.save_color_cloud_plot(Y, ensembleIndex)
 
     print("Done with " + u.colored_string("mds", "blue") + " in: " + u.convert_seconds_to_string(time.time() - start_time))
     logging.debug("Done with mds in: " + u.convert_seconds_to_string(time.time() - start_time))

@@ -21,10 +21,10 @@ SEGMENTS_PATH = ROOT_PATH + '/segments/'
 
 
 # MDS image save path
-MDS_IMAGE_SAVE_PATH = '../mdsImages/'
+MDS_IMAGE_SAVE_PATH = None
 
 # color clouds image save path
-CC_IMAGE_SAVE_PATH = '../colorClouds/'
+CC_IMAGE_SAVE_PATH = None
 
 # OTHER
 
